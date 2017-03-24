@@ -7,14 +7,24 @@
 
 require('sinatra')
 require('sinatra/reloader')
-require('./lib/project_name')
+require('./lib/word_count')
 also_reload('lib/**/*.rb')
 
 get('/') do
   erb(:index)
 end
 
-get('/location_of_param') do
-  @formID = params.fetch('formID').function_name()
-  erb(:/location_of_param)
+get('/grab') do
+  @partial = params[:radio_button]
+  if @partial=='exact' then
+  # @partial = params.fetch('radio_button') --> checked = 3
+  @word = params.fetch('word')
+  @output = params.fetch('sentence').word_count_exact(@word)
+  erb(:sentence)
+  else
+  # @partial = params.fetch('radio_button') --> unchecked = 4
+  @word = params.fetch('word')
+  @output = params.fetch('sentence').word_count_partial(@word)
+  erb(:sentence)
+  end
 end

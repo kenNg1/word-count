@@ -3,10 +3,12 @@ require ('pry')
 class String
 
   define_method(:word_count_exact) do |word|
+    word = word.downcase()
     sentence = self.downcase().split()
     count = 0
     sentence.length.times() do |i|
-      if sentence[i].gsub(/[^0-9A-Za-z]/, '') == word
+      new_word = sentence[i]
+      if new_word.gsub(/[^0-9A-Za-z]/, '') == word
       count+=1
       end
     end
@@ -14,10 +16,12 @@ class String
   end
 
   define_method(:word_count_partial) do |word|
+    word = word.downcase()
     sentence = self.downcase().split()
     count = 0
     sentence.length.times() do |i|
-      if sentence[i].include?("hello")
+      new_word = sentence[i]
+      if new_word.include?(word)
       count+=1
       end
     end

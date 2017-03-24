@@ -15,8 +15,8 @@ get('/') do
 end
 
 get('/grab') do
-  @partial = params[:radio_button]
-  if @partial=='exact' then
+  @partial = params[:checkbox]
+  if @partial=='exact'
   # @partial = params.fetch('radio_button') --> checked = 3
   @word = params.fetch('word')
   @output = params.fetch('sentence').word_count_exact(@word)
